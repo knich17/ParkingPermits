@@ -1,0 +1,41 @@
+Client Requirements:
+
+Ability for customers and business to sign up recording basic address and contact information
+
+Ability for customers to place order, recording when the order was placed and when the shipment will be ready for pickup
+
+Ability for workers to record the following for each package on pickup:
+	the name and address of delivery location
+	time of pickup
+	desired delivery time (i.e. priority)
+	weight of package
+
+Ability for workers to record when a package leaves the warehouse on it's way for delivery
+
+Ability for workers to record the following for each package on dropoff:
+	time of delivery
+	name of reciever
+	reciever signature if required
+
+Ability for workers to view delivery requests containing the following information about each:
+	who the customer is/customer profile
+	pickup location,
+	date/time when ready for pickup 
+	the date/time when the pickup request was made
+	delivery request status (open or closed/satisfied)
+
+Ability for workers to view a list of retrieved packages containing the following information for each:
+	time of pickup
+	which worker collected the package
+	"deliver to" entity name and address
+	type of delivery (high priority/same-day delivery or overnight)
+	weight of package
+	delivery cost
+
+Ability for payments to be recorded including information such as; the type of payment (cash/check/bank deposit), date and ammount.
+
+
+Desirables:
+Ability for customers to track parcels (view when it leaves the warehouse for delivery)
+Ability for customers to check prices for different sizes/priorities and estimate a total cost for multiple packages at once, 
+Ability for customers to view where the local stations are and a way to contact the business. 
