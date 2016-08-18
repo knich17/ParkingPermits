@@ -1,0 +1,48 @@
+Project features:
+
+Ability for departments to lodge permit requests containing the following information:
+	vehicle type (2 wheeler, 4 wheeler or other)
+	person name
+	department making request
+	permit duration (yearly, monthly, daily, hourly)
+	permit start date
+	permit end date
+
+Sucessful permits to be recorded with all the permite request information as well as a permit number/id
+
+Ability for patrol force to record citations contatining the following information:
+	citation number/id
+	date and time of violation
+	violation type (parking, smoking, other)
+
+if parking violation the following need also be recorded:
+	permit number/id (if vehicle has permit)
+	vehicle license number (if vehicle does not have permit)
+	vehicle type
+
+if smoking violation the following need also be recorded:
+	violator name
+	department the violator belongs to
+	violator supervisor
+	place on campus
+
+Ability to track if the fine and if it has been payed for a violation (further processing in terms of late payment, no payment etc. applies if fines aren't payed within a week)
+
+Ability for college personnel to report various health and safety issues containing the following information:
+	date and time
+	person name
+	department
+	description of the issue
+
+Ability to additionally record the date/time and description of actions taken to resolve the issue when a health and safety report has been resolved
+
+Extra features:
+Secure a spot, 
+Find parking near me or near a place, 
+promotions/specials, 
+filters for outdoor-indoor-price-distance from location
+
+parking spot booking and smoke free zone navigation
+
+Client provided desirables:
+Special support for both people with dissabilities and people who do not speak english
