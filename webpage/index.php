@@ -22,43 +22,51 @@
    
   <div class="mainform">
 
-  <form action="form.php" method="post">
+  <form action="database.php" method="post">
     Department Requesting:<br>
     
-    <select required>
-    <option value="">None</option>
-      <option value="blank"></option>
-      <option value="blank"></option>
-      <option value="blank"></option>
+    <select name="department_id" required >
+      <option value="">None</option>
+      <option value="1">IT</option>
+      <option value="2">Business</option>
+      <option value="3">drama</option>
+      <option value="4">sport</option>
     </select><br>
+    
     First name:<br>
     
     <input type="text" name="firstname" required><br>
+    
     Last name:<br>
     
     <input type="text" name="lastname" required><br>
+    
     Lisence Plate:<br>
     
     <input type="text" name="plate" required><br>
+
+    Email:<br>
+    <input type="email" name="email" required><br>
+    
     Who are you:<br>
     
-    <select required>
+    <select name="user_type" required>
     <option value="">None</option>
-      <option value="Student">Student</option>
-      <option value="Staff">Staff</option>
-      <option value="Vistor">Visitor</option>
+      <option value="user">Student</option>
+      <option value="admin">Staff</option>
+      <option value="user">Visitor</option>
     </select><br>
     Vehicle Type:<br>
     
-    <select required>
-    <option value="">None</option>
-      <option value="two">2 Wheel</option>
-      <option value="four">4 Wheel</option>
+    <select name="vehicle_type" required>
+      <option value="">None</option>
+      <option value="2 wheels">2 Wheel</option>
+      <option value="4 wheels">4 Wheel</option>
       <option value="other">Other</option>
-      
     </select><br>
+    
     Entry Date:
-    <input type="date" name="start" min="2016-08-31" required><br>
+    <input type="date" name="start_date" min="2016-08-31" required><br>
     Duration:
     <select required>
     <option value="">None</option>
@@ -80,6 +88,7 @@
       <option value="8">8</option>
       <option value="9">9</option>
       <option value="10">10</option>
+      <option value="11">11</option>
     </select><br>
     <br>
     
