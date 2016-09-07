@@ -19,7 +19,7 @@ $type=$_POST['user_type'];
 $start_date=date('d/m/y', strtotime($_POST['start_date']));
 $end_date = date('d/m/y', strtotime($_POST['start_date']));
 $status = "pending";
-$user_id = 1;
+
 
 
 $sql = "INSERT INTO users(name, email, type, department_id) VALUES ('$name', '$email', '$type',$department_id)";
@@ -30,8 +30,10 @@ if ($connect->query($sql) === TRUE) {
     echo "Error: " . $sql . "<br>" . $connect->error;
 }
 
+$user_id = $connect->insert_id;
+
+
 $sql = "INSERT INTO permits(vehicle_rego, vehicle_type, user_id, department_id, start_date, end_date, status) VALUES ('$vehicle_rego', '$vehicle_type',$user_id, $department_id, '$start_date', '$end_date', '$status')";
-/
 if ($connect->query($sql) === TRUE) {
     echo "New record created successfully";
 } else {

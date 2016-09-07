@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 05, 2016 at 01:36 AM
+-- Generation Time: Sep 07, 2016 at 02:54 AM
 -- Server version: 5.7.11
 -- PHP Version: 5.6.19
 
@@ -30,6 +30,16 @@ CREATE TABLE `departments` (
   `id` int(4) NOT NULL,
   `name` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `departments`
+--
+
+INSERT INTO `departments` (`id`, `name`) VALUES
+(1, 'IT'),
+(2, 'Business'),
+(3, 'drama'),
+(4, 'sport');
 
 -- --------------------------------------------------------
 
@@ -59,7 +69,7 @@ CREATE TABLE `users` (
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `type` enum('user','admin') NOT NULL DEFAULT 'user',
-  `department_id` int(4) NOT NULL
+  `department_id` int(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -96,7 +106,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `permits`
 --
