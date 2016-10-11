@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<!-- This webpage contains the form to allow department staff the ability to fill out a form on behalf of someone who does not have an account -->
+ <!-- This webpage contains the health and safety form to allow people to report any violations they witness -->
 <html lang="en">
   <head>
   <meta charset="utf-8">
@@ -17,12 +17,11 @@
   <body>
   <nav class="navbar navbar-inverse col-lg-12">
     <div class="container-fluid"> 
-      
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myInverseNavbar2" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
         <a class="navbar-brand" href="#">Atmiya College Parking</a> </div>
-
-       <!-- Navigation section linking pages and login/logout buttons -->
+      
+      <!-- Navigation section linking pages and login/logout buttons -->
       <div class="collapse navbar-collapse" id="myInverseNavbar2">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="ParkingPermits.html">Parking</a></li>
@@ -40,8 +39,9 @@
           </li>
         </ul>
       </div>
-      
+      <
     </div>
+
     <!-- Photo carousel banner  --> 
   </nav>
     <div class="container">
@@ -74,89 +74,56 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-9 col-md-12">
-        <div class="well">
+        <div class="row">
           <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"> </div>
           <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"> </div>
-
-          <!-- Department parking permit form -->
-          <h3 class="text-center">Request a Parking Permit</h3>
-          <form action="database.php" method="post">
-            Department Requesting:<br>
-            
-            <select name="department_id" required >
-              <option value="">None</option>
-              <option value="1">IT</option>
-              <option value="2">Business</option>
-              <option value="3">drama</option>
-              <option value="4">sport</option>
-            </select><br>
-            
-            First name:<br>
-            
-            <input type="text" name="firstname" required><br>
-            
-            Last name:<br>
-            
-            <input type="text" name="lastname" required><br>
-            
-            Lisence Plate:<br>
-            
-            <input type="text" name="plate" required><br>
-
-            Email:<br>
-            <input type="email" name="email" required><br>
-            
-            Who are you:<br>
-            
-            <select name="user_type" required>
-            <option value="">None</option>
-              <option value="user">Student</option>
-              <option value="admin">Staff</option>
-              <option value="user">Visitor</option>
-            </select><br>
-            Vehicle Type:<br>
-            
-            <select name="vehicle_type" required>
-              <option value="">None</option>
-              <option value="2 wheels">2 Wheel</option>
-              <option value="4 wheels">4 Wheel</option>
-              <option value="other">Other</option>
-            </select><br>
-            
-            Entry Date:
-            <input type="date" name="start_date" min="2016-08-31" required><br>
-            Duration:
-            <select required>
-            <option value="">None</option>
-              <option value="days">Days</option>
-              <option value="weeks">Weeks</option>
-              <option value="months">Months</option>
-              <option value="year">Year</option>
-              
-            </select>
-            <select required>
-            <option value="">None</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-            </select>
-            <br>
-            <br>
-            
-            
-            <input type="submit" value="Submit">
         </div>
         <div class="row"> </div>
       </div>
-      
+      <div class="col-lg-3 col-md-6 col-md-offset-3 col-lg-offset-0">
+        <div class="well">
+
+  <!-- Health and safety form  -->
+
+      <h3 class="text-center">Submit a Health and Safety Violation Report</h3>
+        <form action="database.php" method="post">
+        <p><br>
+          
+          Your name:<br>
+          
+          <input type="text" name="name" placeholder='Optional' ><br>
+          
+          </p>
+          <p>
+          Department:<br>
+
+          <select name="department_id" >
+            <option value="">Optional</option>
+            <option value="1">IT</option>
+            <option value="2">Business</option>
+            <option value="3">drama</option>
+            <option value="4">sport</option>
+          </select>
+         <br>
+          
+      </p>
+      <p><br>
+          
+        Date and time violation occured:<br>
+        <input type="datetime-local" name="start_date" min="2016-08-31" required>
+        <br>
+        <br>
+        
+        Description of violation:<br>
+       <textarea name="description" cols="29" rows="5" required></textarea>
+        <br>
+          <br>
+        <input type="submit" value="Submit">
+    </div>
+          </p>
+        <hr>
+    <div class="media-object-default"> </div>
+      </div>
     </div>
   </div>
   <hr>
@@ -166,10 +133,9 @@
         <div class="col-lg-6">
           <h3>Information</h3>
    
+        <!-- Information about Atmiya services -->
         </div>
         <div class="col-lg-6">
-
-        <!-- Information about Atmiya services -->
           <h3>Our Services</h3>
           <hr>
           <ul id="myTab1" class="nav nav-tabs">
@@ -184,11 +150,11 @@
               department employees.</p>
             </div>
             <div class="tab-pane fade" id="pane2">
-              <p class="text-center"><img src="../images/9b59b6.gif" alt=""></p>
+              <p class="text-center"><img src="../images/safety_first.jpg" alt=""></p>
               <p>At Atmiya College, Health and Safety are managed by our health and safety department. Submiting a Health and safety report may help us better improve the college environment </p>
             </div>
             <div class="tab-pane fade" id="pane3">
-              <p class="text-center"><img src="../images/16a085.gif" alt=""></p>
+              <p class="text-center"><img src="../images/violation.jpg" alt=""></p>
               <p>At Atmiya College, Voilations are managed by our health and safety department. Submiting a voilation report may help us discover and process voilation more efficient</p>
             </div>
           </div>
@@ -208,7 +174,7 @@
   </footer>
   <!-- jQuery --> 
   <script src="../js/jquery-1.11.3.min.js"></script> 
-
   <script src="../js/bootstrap.js"></script>
+      
   </body>
 </html>
