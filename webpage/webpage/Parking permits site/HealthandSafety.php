@@ -16,7 +16,7 @@ $department_id=$_POST['department_id'];
 $date_time=date('d/m/y', strtotime($_POST['date_time']));
 
 
-$sql = "INSERT INTO users(name, department_id, date_time, description) VALUES ('$name',$department_id, 'date_time', 'description')";
+$sql = "INSERT INTO has_violations(name, department_id, date_time, description) VALUES ('$name',$department_id, '$date_time', '$description')";
 
 if ($connect->query($sql) === TRUE) {
     echo "New record created successfully";
