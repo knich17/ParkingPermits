@@ -1,6 +1,6 @@
 
 <?php
-$connect=mysqli_connect('localhost','root','qwerty','parking_permits');
+$connect=mysqli_connect('localhost','root','','parking_permits');
  
 if(mysqli_connect_errno($connect))
 {
@@ -22,18 +22,18 @@ $status = "pending";
 
 
 
-$sql = "INSERT INTO users(name, email, type, department_id) VALUES ('$name', '$email', '$type',$department_id)";
-
-if ($connect->query($sql) === TRUE) {
-    echo "New record created successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . $connect->error;
-}
+//$sql = "INSERT INTO users(name, email, type, department_id) VALUES ('$name', '$email', '$type',$department_id)";
+//
+//if ($connect->query($sql) === TRUE) {
+//    echo "New record created successfully";
+//} else {
+//    echo "Error: " . $sql . "<br>" . $connect->error;
+//}
 
 $user_id = $connect->insert_id;
 
 
-$sql = "INSERT INTO permits(vehicle_rego, vehicle_type, user_id, department_id, start_date, end_date, status) VALUES ('$vehicle_rego', '$vehicle_type',$user_id, $department_id, '$start_date', '$end_date', '$status')";
+$sql = "INSERT INTO permits(vehicle_rego, vehicle_type, user_id, start_date, end_date) VALUES ('$vehicle_rego', '$vehicle_type', 1, '$start_date', '$end_date')";
 if ($connect->query($sql) === TRUE) {
     echo "New record created successfully";
 } else {
