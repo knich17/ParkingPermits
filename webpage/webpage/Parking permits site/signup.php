@@ -1,18 +1,19 @@
 
 <?php
-$connect=mysqli_connect('localhost','root','','parking_permits');
+$connect=mysqli_connect('localhost','root','qwerty','parking_permits');
  
 if(mysqli_connect_errno($connect))
 {
 		echo 'Failed to connect';
 }
- 
-$pass = password_hash('password', PASSWORD_DEFAULT);
+
+$password = $_POST['password'];
+$password_hash = password_hash($password, PASSWORD_BCRYPT);
 $name=$_POST['name'];
 
 $department_id=$_POST['department_id'];
 $email=$_POST['email'];
-$password_hash=(string)$pass;
+//$password_hash=(string)$pass;
 $type=$_POST['user_type'];
 
 
