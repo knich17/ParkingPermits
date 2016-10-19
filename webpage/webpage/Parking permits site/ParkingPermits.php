@@ -1,5 +1,5 @@
 <?php
-    $db = new PDO('mysql:host=localhost;dbname=parking_permits;charset=utf8mb4', 'root', '');
+    $db = new PDO('mysql:host=localhost;dbname=parking_permits;charset=utf8mb4', 'root', 'qwerty');
     /*
         localhost - it's location of the mysql server, usually localhost
         root - your username
@@ -9,7 +9,8 @@
     */
     /* tutorial_search is the name of database we've created */
      
-     
+    session_start();
+// if the user is logged in already, redirect them to the logged in homepage
      
 ?>
 <!DOCTYPE html>
@@ -40,14 +41,24 @@
        <!-- Navigation section linking pages and login/logout buttons -->
       <div class="collapse navbar-collapse" id="myInverseNavbar2">
         <ul class="nav navbar-nav navbar-right">
+        <?php
+          if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'yes') {
+            echo "<li><a>Welcome, " . $_COOKIE['user'] . " </a></li>";
+          }
+        ?>
           <li><a href="ParkingPermits.php">Parking</a></li>
-          <li><a href="HealthandSafety.html">Health & Safety Violations</a></li>
+          <li><a href="Violations.php">Report Violation</a></li>
           <li><a href="#">Link</a></li>
           <li><a href="#">Link</a></li>
           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">Dropdown <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
+            <?php
+              if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'yes') {
+                echo '<li><a href="loggedout.php">Logout</a></li>';
+              } else if (!isset($_SESSION['loggedIn']) && !$_SESSION['loggedIn'] == 'yes') {
+                echo '<li><a href="login.php">Login</a></li><li><a href="signup.php">Sign up</a></li>';
+              }
+            ?>
               <li><a href="#">Something else here</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="#">Separated link</a></li>
@@ -217,6 +228,39 @@
         echo "Minimum length is ".$min_length;
     }
    }
+        } else {
+          $query = htmlspecialchars($query); 
+        // changes characters used in html to their equivalents, for example: < to &gt;
+        $selected = $_GET['radio'];
+        if ($selected == "parkpermits") {
+          $raw_results = $db->query("SELECT * FROM permits");
+          
+
+         
+
+          // * means that it selects all fields, you can also write: `id`, `title`, `text`
+          // articles is the name of our table
+         
+          // '%$query%' is what we're looking for, % means anything, for example if $query is Hello
+          // it will match "hello", "Hello man", "gogohello", if you want exact match use `title`='$query'
+          // or if you want to match just full word so "gogohello" is out use '% $query %' ...OR ... '$query %' ... OR ... '% $query'
+         
+          if($raw_results->rowCount() > 0){ // if one or more rows are returned do following
+              echo "<table class='pure-table pure-table-horizontal'><tr>
+                        <td><h3>Permit ID</h3></td><td><h3>Name</h3></td><td><h3>Vehicle Type</h3></td><td><h3>Start Date</h3></td><td><h3>Expiry Date</h3></td>";
+              while($results = $raw_results->fetch(PDO::FETCH_ASSOC)){
+                $test = $results['user_id'];
+              // $results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
+                  $raw_results_users = $db->query("SELECT name FROM users WHERE ('user_id' LIKE '%".$test."%')");
+                  $results_users = $raw_results_users->fetch(PDO::FETCH_ASSOC);
+                  echo "<tr>";
+                  echo "<td><p>".$results['permit_id']."</td><td>".$results_users['name']."</td><td>".$results['vehicle_type']."</p></td><td>".$results['start_date']."</td><td>".$results['end_date']."</td>";
+                  echo "</tr>";
+                  // posts results gotten from database(title and text) you can also show id ($results['id'])
+               }
+              echo "</tr></table>";
+             
+          }
         }
 ?>
         </div>
@@ -230,9 +274,10 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6">
-          <h3>Information</h3>
-   
-        </div>
+              <h3>Location</h3>
+            <p><iframe width="500" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=Atmiya%20&key=AIzaSyBb2OkrRfTcJo6KHcc3vH2pVHORmSyrVME" allowfullscreen></iframe></p>
+          </div>
+        
         <div class="col-lg-6">
 
         <!-- Information about Atmiya services -->
@@ -246,16 +291,16 @@
           <div id="myTabContent1" class="tab-content">
             <div class="tab-pane fade in active" id="home1">
               <p class="text-center"><img src="../images/permit.jpg" alt=""></p>
-              <p>At Atmiya College Permits for parking are managed by our health and safety department. Requesting a Permit can be done online or on campus and are approved by one of our
+              <p>At Atmiya College, Permits for parking are managed by our health and safety department. Requesting a Permit can be done online or on campus and are approved by one of our
               department employees.</p>
             </div>
             <div class="tab-pane fade" id="pane2">
-              <p class="text-center"><img src="../images/9b59b6.gif" alt=""></p>
-              <p>to be added</p>
+              <p class="text-center"><img src="../images/safety_first.jpg" alt=""></p>
+              <p>At Atmiya College, Health and Safety are managed by our health and safety department. Submiting a Health and safety report may help us better improve the college environment </p>
             </div>
             <div class="tab-pane fade" id="pane3">
-              <p class="text-center"><img src="../images/16a085.gif" alt=""></p>
-              <p>to be added</p>
+              <p class="text-center"><img src="../images/violation.jpg" alt=""></p>
+              <p>At Atmiya College, Voilations are managed by our health and safety department. Submiting a voilation report may help us discover and process voilation more efficient</p>
             </div>
           </div>
         </div>

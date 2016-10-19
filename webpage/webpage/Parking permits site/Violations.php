@@ -1,3 +1,18 @@
+<?php
+    $db = new PDO('mysql:host=localhost;dbname=parking_permits;charset=utf8mb4', 'root', 'qwerty');
+    /*
+        localhost - it's location of the mysql server, usually localhost
+        root - your username
+        third is your password
+         
+        if connection fails it will stop loading the page and display an error
+    */
+    /* tutorial_search is the name of database we've created */
+     
+    session_start();
+// if the user is logged in already, redirect them to the logged in homepage
+     
+?>
 <!DOCTYPE html>
 
 <!-- This webpage contains the form to allow department staff the ability to fill out a form on behalf of someone who does not have an account -->
@@ -26,14 +41,24 @@
        <!-- Navigation section linking pages and login/logout buttons -->
       <div class="collapse navbar-collapse" id="myInverseNavbar2">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="ParkingPermits.html">Parking</a></li>
-          <li><a href="HealthandSafety.html">Health & Safety Violations</a></li>
+        <?php
+          if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'yes') {
+            echo "<li><a>Welcome, " . $_COOKIE['user'] . " </a></li>";
+          }
+        ?>
+          <li><a href="ParkingPermits.php">Parking</a></li>
+          <li><a href="Violations.php">Report Violation</a></li>
           <li><a href="#">Link</a></li>
           <li><a href="#">Link</a></li>
           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">Dropdown <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
+            <?php
+              if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'yes') {
+                echo '<li><a href="loggedout.php">Logout</a></li>';
+              } else if (!isset($_SESSION['loggedIn']) && !$_SESSION['loggedIn'] == 'yes') {
+                echo '<li><a href="login.php">Login</a></li><li><a href="signup.php">Sign up</a></li>';
+              }
+            ?>
               <li><a href="#">Something else here</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="#">Separated link</a></li>
@@ -83,7 +108,7 @@
           <h3 class="text-center">Submit a parking or smoking violation</h3>
           <form action="permit_app.php" method="post">
             Entry Date:
-            <input type="datetime-local" name="date_time" min="2016-01-01" required><br>
+            <input type="datetime-local" name="date_time" min="2016-01-01" required>
 
             Violation Type:
             
@@ -180,9 +205,10 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6">
-          <h3>Information</h3>
-   
-        </div>
+              <h3>Location</h3>
+            <p><iframe width="500" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=Atmiya%20&key=AIzaSyBb2OkrRfTcJo6KHcc3vH2pVHORmSyrVME" allowfullscreen></iframe></p>
+          </div>
+        
         <div class="col-lg-6">
 
         <!-- Information about Atmiya services -->

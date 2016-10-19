@@ -1,6 +1,6 @@
 
 <?php
-$connect=mysqli_connect('localhost','root','','parking_permits');
+$connect=mysqli_connect('localhost','root','qwerty','parking_permits');
  
 if(mysqli_connect_errno($connect))
 {
