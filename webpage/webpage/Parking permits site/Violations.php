@@ -1,5 +1,5 @@
 <?php
-    $db = new PDO('mysql:host=localhost;dbname=parking_permits;charset=utf8mb4', 'root', 'qwerty');
+    $db = new PDO('mysql:host=localhost;dbname=parking_permits;charset=utf8mb4', 'root', '');
     /*
         localhost - it's location of the mysql server, usually localhost
         root - your username
@@ -55,7 +55,7 @@
             <?php
               if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'yes') {
                 echo '<li><a href="loggedout.php">Logout</a></li>';
-              } else if (!isset($_SESSION['loggedIn']) && !$_SESSION['loggedIn'] == 'yes') {
+              } else {
                 echo '<li><a href="login.php">Login</a></li><li><a href="signup.php">Sign up</a></li>';
               }
             ?>
@@ -209,7 +209,7 @@
       <div class="row">
         <div class="col-lg-6">
               <h3>Location</h3>
-            <p><iframe width="500" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=Atmiya%20&key=AIzaSyBb2OkrRfTcJo6KHcc3vH2pVHORmSyrVME" allowfullscreen></iframe></p>
+            <p><iframe width="100%" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=Atmiya%20&key=AIzaSyBb2OkrRfTcJo6KHcc3vH2pVHORmSyrVME" allowfullscreen></iframe></p>
           </div>
         
         <div class="col-lg-6">

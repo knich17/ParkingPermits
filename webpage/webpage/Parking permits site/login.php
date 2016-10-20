@@ -118,7 +118,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'yes') {
       <div class="row">
         <div class="col-lg-6">
               <h3>Location</h3>
-            <p><iframe width="500" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=Atmiya%20&key=AIzaSyBb2OkrRfTcJo6KHcc3vH2pVHORmSyrVME" allowfullscreen></iframe></p>
+            <p><iframe width="100%" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=Atmiya%20&key=AIzaSyBb2OkrRfTcJo6KHcc3vH2pVHORmSyrVME" allowfullscreen></iframe></p>
           </div>
         
         <div class="col-lg-6">
