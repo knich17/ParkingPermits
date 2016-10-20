@@ -106,13 +106,16 @@
 
           <!-- Department parking permit form -->
           <h3 class="text-center">Submit a parking or smoking violation</h3>
-          <form action="permit_app.php" method="post">
-            Entry Date:
-            <input type="datetime-local" name="date_time" min="2016-01-01" required>
+          <form action="violation_app.php" method="post">
+            Date of Violation:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="datetime-local" name="date_time" min="2016-01-01" required><br>
 
-            Violation Type:
+            Violation Description:&nbsp;&nbsp;
+            <input type="text" name="violation_desc" id="violation_desc" required><br>
+
+            Violation Type:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             
-            <select name="department_id" id="department_select" onchange="violationChanged();" required >
+            <select name="violation_type" id="violation_type" onchange="violationChanged();" required >
               <option value="0">Select a violation type</option>
               <option value="1">Parking</option>
               <option value="2">Smoking</option>
@@ -123,7 +126,7 @@
             <input type="text" name="permit_id"><br>
 
             Registration number:<br>
-            <input type="text" name="permit_id" id="permit_id" required><br>
+            <input type="text" name="rego" id="rego" required><br>
 
             Vehicle Type:<br>
             <select name="vehicle_type" id="vehicle_type" required>
@@ -157,7 +160,7 @@
             <script type="text/javascript">
               function violationChanged()
               {
-                if ($('#department_select').val() == "0") {
+                if ($('#violation_type').val() == "0") {
                   $('#submit_button')
                   .attr("disabled", true);
                   //.css({'background-color':'grey'});
@@ -165,17 +168,17 @@
                   $('#submit_button').attr("disabled", false);
                 }
 
-                if ($('#department_select').val() == "1") {
+                if ($('#violation_type').val() == "1") {
                   $('#parkingDiv').show();
-                  $('#permit_id').attr("required", true);
+                  $('#rego').attr("required", true);
                   $('#vehicle_type').attr("required", true);
                 } else {
                   $('#parkingDiv').hide();
-                  $('#permit_id').attr("required", false);
+                  $('#rego').attr("required", false);
                   $('#vehicle_type').attr("required", false);
                 }
 
-                if ($('#department_select').val() == "2") {
+                if ($('#violation_type').val() == "2") {
                   $('#smokingDiv').show();
                   $('#violator_name').attr("required", true);
                   $('#department_id').attr("required", true);
