@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 20, 2016 at 06:59 AM
+-- Generation Time: Oct 21, 2016 at 03:22 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `has_violations` (
   `description` varchar(10000) NOT NULL,
   PRIMARY KEY (`violation_id`),
   KEY `department_id` (`department_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `has_violations`
@@ -93,7 +93,9 @@ CREATE TABLE IF NOT EXISTS `has_violations` (
 
 INSERT INTO `has_violations` (`violation_id`, `name`, `department_id`, `time`, `description`) VALUES
 (1, 'kaney', NULL, '2016-01-01 01:00:00', 'die'),
-(2, 'NULL', NULL, '1970-01-01 01:00:00', '');
+(2, 'NULL', NULL, '1970-01-01 01:00:00', ''),
+(3, 'Liam Doyle', 2, '2016-10-11 02:12:12', 'wqeew'),
+(4, 'Liam Doyle', 2, '2016-10-11 02:12:12', 'wqeew');
 
 -- --------------------------------------------------------
 
@@ -204,20 +206,23 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(9) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `password_hash` int(10) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
   `type` enum('admin','staff','student','visitor') NOT NULL,
   `department_id` int(4) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `unique_email` (`email`),
   KEY `department_id` (`department_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`user_id`, `name`, `email`, `password_hash`, `type`, `department_id`) VALUES
-(1, 'Kane Nicholson', 'kane@kane.com', 0, 'admin', 1);
+(1, 'Kane Nicholson', 'kane@kane.com', '0', 'admin', 1),
+(3, 'qwerty', 'root', '0', 'student', 1),
+(9, 'Liam Doyle', 'doyle230295@gmail.com', '$2y$10$NPZRoUvjWBxktPMUhujMnulvMwe60mYxUK4LXdeOGdcVqs/4OCJiK', 'staff', 2),
+(10, '1', 'root1', '$2y$10$92rWzr2pl1JtHYO7NCI0DeIxpNpFM.Hz9LL7mtqo71dNEY/uOVQPu', 'student', 1);
 
 --
 -- Constraints for dumped tables
