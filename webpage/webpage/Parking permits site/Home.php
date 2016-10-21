@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-
-<!-- This webpage contains the form to allow department staff the ability to fill out a form on behalf of someone who does not have an account -->
 <?php
     $db = new PDO('mysql:host=localhost;dbname=parking_permits;charset=utf8mb4', 'root', '');
     /*
@@ -14,12 +11,14 @@
      
     session_start();
 // if the user is logged in already, redirect them to the logged in homepage
-    if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'yes') {
-      header('Location: ParkingPermits.php');
-    }
+     
 ?>
+<!DOCTYPE html>
+
+<!-- This webpage contains the form to allow department staff the ability to fill out a form on behalf of someone who does not have an account -->
 <html lang="en">
   <head>
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -44,21 +43,19 @@
         <ul class="nav navbar-nav navbar-right">
         <?php
           if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'yes') {
-            echo "Welcome, " . $_COOKIE['user'] . " ";
-            echo '<a href="loggedout.php">Logout</a>';
+            echo "<li><a>Welcome, " . $_COOKIE['user'] . " </a></li>";
           }
         ?>
           <li><a href="ParkingPermits.php">Parking</a></li>
-          <li><a href="Violations.php">Report Violations</a></li>
+          <li><a href="Violations.php">Report Violation</a></li>
           <li><a href="#">Link</a></li>
           <li><a href="#">Link</a></li>
           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">Dropdown <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <?php
+            <?php
               if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'yes') {
-                echo '<a href="loggedout.php">Logout</a>';
-            
-              }else {
+                echo '<li><a href="loggedout.php">Logout</a></li>';
+              } else {
                 echo '<li><a href="login.php">Login</a></li><li><a href="signup.php">Sign up</a></li>';
               }
             ?>
@@ -99,51 +96,45 @@
     </div>
   <hr>
 
-      
-<div class="container">
+  <!-- Blank section for possible photo or other information to display on the webpage -->
+  <div class="container">
     <div class="row">
       <div class="col-lg-9 col-md-12">
         <div class="well">
           <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"> </div>
           <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"> </div>
-  <nav class="sidemenu" style="z-index:3;width:250px;margin-top:51px;" id ="sidemenu">
-  <form id='register' action='signupcheck.php' method='post' 
-    accept-charset='UTF-8'>
 
-<legend>Register</legend>
+          <?php
+              if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'yes') {
+                $user = $_COOKIE['user'];
+                
+              	$sql = "SELECT * FROM has_violations WHERE name = '$user'"  ;
+                $result = $db->query($sql);
+              	if($result->rowCount() > 0){ // if one or more rows are returned do following
+              echo "<table class='pure-table pure-table-horizontal'><tr>
+                        <td><h3>Violation ID</h3></td><td><h3>Name</h3></td><td><h3>Department ID</h3></td><td><h3>Date</h3></td><td><h3>Description</h3></td>";
+              while($results = $result->fetch(PDO::FETCH_ASSOC)){
+              // $results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
+                
+                  
+                  echo "<tr>";
+                  echo "<p><td>".$results['violation_id']."</td><td>".$results['name']."</td><td>".$results['department_id']."</td><td>".$results['time']."</td><td>".$results['description']."</td></p>";
+                  echo "</tr>";
+                  // posts results gotten from database(title and text) you can also show id ($results['id'])
+               }
+              echo "</tr></table>";
+             
+          }else{
 
-<input type='hidden' name='submitted' id='submitted' value='1'/>
-<label for='name' >Your Full Name*: </label>
-<input type='text' name='name' id='name' maxlength="50" />
-<label for='email' >Email Address*:</label>
-<input type='text' name='email' id='email' maxlength="50" /><br>
-
-
-<label for='password' >Password*:</label>
-<input type='password' name='password' id='password' maxlength="50" />
-      
-<label for='department_id' >Department*:</label>
-<select name="department_id" required >
-      <option value="">None</option>
-      <option value="1">IT</option>
-      <option value="2">Business</option>
-      <option value="3">drama</option>
-      <option value="4">sport</option>
-    </select><br>
-     Who are you:
-    
-    <select name="user_type" required>
-    <option value="">None</option>
-      <option value="student">Student</option>
-      <option value="staff">Staff</option>
-      <option value="visitor">Visitor</option>
-    </select><br>
-<input type='submit' name='Submit' value='Submit' />
-
-
-</form>
-    <br>
-            <div class="row"> </div>
+                echo '</br> Welcome back, there are currently no outstanding fees. Thankyou :).';
+            	}
+              } else {
+                echo 'sign in or sign up';
+              }
+            ?>
+          
+        </div>
+        <div class="row"> </div>
       </div>
       
     </div>
@@ -200,10 +191,5 @@
   <script src="../js/jquery-1.11.3.min.js"></script> 
 
   <script src="../js/bootstrap.js"></script>
-
-    
-
-
-</body>
-
+  </body>
 </html>

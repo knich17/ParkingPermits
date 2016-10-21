@@ -1,7 +1,7 @@
 
 <?php
 session_start();
-$connect=mysqli_connect('localhost','root','qwerty','parking_permits');
+$connect=mysqli_connect('localhost','root','','parking_permits');
  
 if(mysqli_connect_errno($connect))
 {
@@ -9,7 +9,7 @@ if(mysqli_connect_errno($connect))
 }
 
 $password = $_POST['password'];
-$password_hash = password_hash($password, PASSWORD_BCRYPT);
+$password_hash = password_hash($password, PASSWORD_DEFAULT);
 $name=$_POST['name'];
 
 $department_id=$_POST['department_id'];

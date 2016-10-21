@@ -1,5 +1,5 @@
 <?php
-    $db = new PDO('mysql:host=localhost;dbname=parking_permits;charset=utf8mb4', 'root', 'qwerty');
+    $db = new PDO('mysql:host=localhost;dbname=parking_permits;charset=utf8mb4', 'root', '');
     /*
         localhost - it's location of the mysql server, usually localhost
         root - your username
@@ -228,40 +228,8 @@
         echo "Minimum length is ".$min_length;
     }
    }
-        } else {
-          $query = htmlspecialchars($query); 
-        // changes characters used in html to their equivalents, for example: < to &gt;
-        $selected = $_GET['radio'];
-        if ($selected == "parkpermits") {
-          $raw_results = $db->query("SELECT * FROM permits");
-          
-
-         
-
-          // * means that it selects all fields, you can also write: `id`, `title`, `text`
-          // articles is the name of our table
-         
-          // '%$query%' is what we're looking for, % means anything, for example if $query is Hello
-          // it will match "hello", "Hello man", "gogohello", if you want exact match use `title`='$query'
-          // or if you want to match just full word so "gogohello" is out use '% $query %' ...OR ... '$query %' ... OR ... '% $query'
-         
-          if($raw_results->rowCount() > 0){ // if one or more rows are returned do following
-              echo "<table class='pure-table pure-table-horizontal'><tr>
-                        <td><h3>Permit ID</h3></td><td><h3>Name</h3></td><td><h3>Vehicle Type</h3></td><td><h3>Start Date</h3></td><td><h3>Expiry Date</h3></td>";
-              while($results = $raw_results->fetch(PDO::FETCH_ASSOC)){
-                $test = $results['user_id'];
-              // $results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
-                  $raw_results_users = $db->query("SELECT name FROM users WHERE ('user_id' LIKE '%".$test."%')");
-                  $results_users = $raw_results_users->fetch(PDO::FETCH_ASSOC);
-                  echo "<tr>";
-                  echo "<td><p>".$results['permit_id']."</td><td>".$results_users['name']."</td><td>".$results['vehicle_type']."</p></td><td>".$results['start_date']."</td><td>".$results['end_date']."</td>";
-                  echo "</tr>";
-                  // posts results gotten from database(title and text) you can also show id ($results['id'])
-               }
-              echo "</tr></table>";
-             
-          }
         }
+
 ?>
         </div>
         <div class="row"> </div>

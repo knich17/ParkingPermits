@@ -1,6 +1,6 @@
 
 <?php
-$connect=mysqli_connect('localhost','root','qwerty','parking_permits');
+$connect=mysqli_connect('localhost','root','','parking_permits');
  
 session_start();
 
