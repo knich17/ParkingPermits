@@ -36,20 +36,29 @@
       
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myInverseNavbar2" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-        <a class="navbar-brand" href="#">Atmiya College Parking</a> </div>
+        <a class="navbar-brand" href="Home.php">Atmiya College Parking</a> </div>
 
        <!-- Navigation section linking pages and login/logout buttons -->
       <div class="collapse navbar-collapse" id="myInverseNavbar2">
         <ul class="nav navbar-nav navbar-right">
+        
         <?php
           if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'yes') {
             echo "<li><a>Welcome, " . $_COOKIE['user'] . " </a></li>";
           }
+          ?>
+          <li><a href="Home.php">Home</a></li>
+          <?php
+          if($_COOKIE['type'] == 'admin'){
+            echo '<li><a href="ParkingPermits.php">Search Database</a></li>';
+          }else{
+            echo '<li><a href="parkingpermitapplication.php">Parking Permit Application </a></li>';
+
+          }
         ?>
-          <li><a href="ParkingPermits.php">Parking</a></li>
+          
           <li><a href="Violations.php">Report Violation</a></li>
-          <li><a href="#">Link</a></li>
-          <li><a href="#">Link</a></li>
+          
           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">Dropdown <span class="caret"></span></a>
             <ul class="dropdown-menu">
             <?php

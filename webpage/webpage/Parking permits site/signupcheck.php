@@ -38,7 +38,7 @@ if ($connect->query($sql) === TRUE) {
 		$cookie_userid_value = $user_id;
 		setcookie($cookie_userid, $cookie_userid_value, time() + (86400 * 30), "/");
 		echo $cookie_userid_value;
-		//header('Location: Home.php');
+		header('Location: Home.php');
 } else {
     echo "Error: " . $sql . "<br>" . $connect->error;
 }

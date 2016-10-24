@@ -45,6 +45,7 @@ $user_id = $_COOKIE['user_id'];
 $sql = "INSERT INTO permits(vehicle_rego, vehicle_type, user_id, start_date, end_date) VALUES ('$vehicle_rego', '$vehicle_type', '$user_id', '$start_date', '$end_date')";
 if ($connect->query($sql) === TRUE) {
     echo "New record created successfully";
+    header('Location: parkingpermitapplication.php');
 } else {
     echo "Error: " . $sql . "<br>" . $connect->error;
 }

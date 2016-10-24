@@ -51,7 +51,7 @@ $userid_query = "SELECT user_id FROM users WHERE email = '$email'";
 
 		echo "$cookie_userid_value";
 		
-		//header('Location: Home.php');
+		header('Location: Home.php');
 
 } else {
     echo 'Invalid password.';
