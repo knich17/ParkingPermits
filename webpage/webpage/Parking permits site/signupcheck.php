@@ -34,7 +34,7 @@ if ($connect->query($sql) === TRUE) {
 		$cookie_type_value = $type;
 		setcookie($cookie_type, $cookie_type_value, time() + (86400 * 30), "/");
 		$user_id = $connect->insert_id;
-		$cookie_userid = "userid";
+		$cookie_userid = "user_id";
 		$cookie_userid_value = $user_id;
 		setcookie($cookie_userid, $cookie_userid_value, time() + (86400 * 30), "/");
 		echo $cookie_userid_value;

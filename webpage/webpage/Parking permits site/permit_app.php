@@ -1,6 +1,6 @@
 
 <?php
-$connect=mysqli_connect('localhost','root','qwerty','parking_permits');
+$connect=mysqli_connect('localhost','root','','parking_permits');
  
 if(mysqli_connect_errno($connect))
 {
@@ -8,45 +8,47 @@ if(mysqli_connect_errno($connect))
 }
  
 
-$name=$_POST['firstname'];
 
-$department_id=$_POST['department_id'];
-$email=$_POST['email'];
 $vehicle_rego=$_POST['plate'];
 $vehicle_type=$_POST['vehicle_type'];
-$type=$_POST['user_type'];
-
-$start_date=date('d/m/y', strtotime($_POST['start_date']));
-$end_date = date('d/m/y', strtotime($_POST['start_date']));
-$status = "pending";
+$type=$_COOKIE['type'];
 
 
+$date_given = $_POST["date_time"];
+echo $date_given;
+$duration = $_POST['duration'];
+$lenght = $_POST['lenght'];
 
-//$sql = "INSERT INTO users(name, email, type, department_id) VALUES ('$name', '$email', '$type',$department_id)";
-//
-//if ($connect->query($sql) === TRUE) {
-//    echo "New record created successfully";
-//} else {
-//    echo "Error: " . $sql . "<br>" . $connect->error;
-//}
+if($duration == 'days'){
+$end_date=( new DateTime($date_given));
+date_modify($end_date,"+".$lenght." days");
+echo date_format($end_date,"Y-m-d");
 
-$user_id = $connect->insert_id;
+}else if ($duration == 'months'){
+$end_date=( new DateTime($date_given));
+date_modify($end_date,"+".$lenght." month");
+echo date_format($end_date,"Y-m-d");
+
+}else if($duration == 'year'){
+$end_date=( new DateTime($date_given));
+date_modify($end_date,"+".$lenght." year");
+echo date_format($end_date,"Y-m-d");
+
+}
+$start_date=date('y/m/d', strtotime($_POST['date_time']));
+$end_date=$end_date->format("Y-m-d");
+//$end_date = date('d/m/y', strtotime($_POST['start_date']));
+$user_id = $_COOKIE['user_id'];
 
 
-$sql = "INSERT INTO permits(vehicle_rego, vehicle_type, user_id, start_date, end_date) VALUES ('$vehicle_rego', '$vehicle_type', 1, '$start_date', '$end_date')";
+
+$sql = "INSERT INTO permits(vehicle_rego, vehicle_type, user_id, start_date, end_date) VALUES ('$vehicle_rego', '$vehicle_type', '$user_id', '$start_date', '$end_date')";
 if ($connect->query($sql) === TRUE) {
     echo "New record created successfully";
 } else {
     echo "Error: " . $sql . "<br>" . $connect->error;
 }
 
-// if ($result->num_rows > 0) {
-//     // output data of each row
-//     while($row = $result->fetch_assoc()) {
-//         echo "id: " . $row["id"]. " - Name: " . $row["name"]. " <br>";
-//     }
-// } else {
-//     echo "0 results";
-// }
+
 $connect->close();
 ?>
