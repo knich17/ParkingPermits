@@ -1,17 +1,17 @@
 <?php
-    $db = new PDO('mysql:host=localhost;dbname=parking_permits;charset=utf8mb4', 'root', '');
-    /*
-        localhost - it's location of the mysql server, usually localhost
-        root - your username
-        third is your password
-         
-        if connection fails it will stop loading the page and display an error
-    */
-    /* tutorial_search is the name of database we've created */
-     
-    session_start();
+$db = new PDO('mysql:host=localhost;dbname=parking_permits;charset=utf8mb4', 'root', '');
+/*
+localhost - it's location of the mysql server, usually localhost
+root - your username
+third is your password
+
+if connection fails it will stop loading the page and display an error
+*/
+/* tutorial_search is the name of database we've created */
+
+session_start();
 // if the user is logged in already, redirect them to the logged in homepage
-     
+
 ?>
 <!DOCTYPE html>
 
@@ -42,10 +42,10 @@
       <div class="collapse navbar-collapse" id="myInverseNavbar2">
         <ul class="nav navbar-nav navbar-right">
         <?php
-          if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'yes') {
-            echo "<li><a>Welcome, " . $_COOKIE['user'] . " </a></li>";
-          }
-        ?>
+if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'yes') {
+    echo "<li><a>Welcome, " . $_COOKIE['user'] . " </a></li>";
+}
+?>
           <li><a href="ParkingPermits.php">Parking</a></li>
           <li><a href="Violations.php">Report Violation</a></li>
           <li><a href="#">Link</a></li>
@@ -53,12 +53,12 @@
           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">Dropdown <span class="caret"></span></a>
             <ul class="dropdown-menu">
             <?php
-              if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'yes') {
-                echo '<li><a href="loggedout.php">Logout</a></li>';
-              } else if (!isset($_SESSION['loggedIn']) && !$_SESSION['loggedIn'] == 'yes') {
-                echo '<li><a href="login.php">Login</a></li><li><a href="signup.php">Sign up</a></li>';
-              }
-            ?>
+if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'yes') {
+    echo '<li><a href="loggedout.php">Logout</a></li>';
+} else {
+    echo '<li><a href="login.php">Login</a></li><li><a href="signup.php">Sign up</a></li>';
+}
+?>
               <li><a href="#">Something else here</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="#">Separated link</a></li>
@@ -110,125 +110,228 @@
                   
             </form>
           <form action="parkingpermits.php" method="GET">
-          	<input type="radio" name="radio" value="parkpermits" checked /><label>Parking Permits[ID]   </label>
+            <input type="radio" name="radio" value="parkpermits" checked /><label>Parking Permits[ID]   </label>
             <input type="radio" name="radio" value="health"><label>Health Violations    </label>
-			<input type="radio" name="radio" value="parkviolations"><label>Parking Violations</label><br>
+      <input type="radio" name="radio" value="parkviolations"><label>Parking Violations</label><br>
             <input type="text" name="query" placeholder="Permit ID" />
             <input type="submit" value="Search" />
           </form>
             <?php
-            if (isset($_GET['query'])) {
-    $query = $_GET['query']; 
+if (isset($_GET['query'])){
+if ($_COOKIE['type'] == "admin" && isset($_GET['query']) == false) {
+    
+    
+    // changes characters used in html to their equivalents, for example: < to &gt;
+    $selected = $_GET['radio'];
+    if ($selected == "parkpermits") {
+        $raw_results      = $db->query("SELECT * FROM permits");
+        $raw_results_name = $db->query("SELECT name FROM users");
+        
+        
+        
+        // * means that it selects all fields, you can also write: `id`, `title`, `text`
+        // articles is the name of our table
+        
+        // '%$query%' is what we're looking for, % means anything, for example if $query is Hello
+        // it will match "hello", "Hello man", "gogohello", if you want exact match use `title`='$query'
+        // or if you want to match just full word so "gogohello" is out use '% $query %' ...OR ... '$query %' ... OR ... '% $query'
+        
+        if ($raw_results->rowCount() > 0) { // if one or more rows are returned do following
+            echo "<table class='pure-table pure-table-horizontal'><tr>
+                        <td><h3>Permit ID</h3></td><td><h3>Name</h3></td><td><h3>Vehicle Type</h3></td><td><h3>Start Date</h3></td><td><h3>Expiry Date</h3></td>";
+            while ($results = $raw_results->fetch(PDO::FETCH_ASSOC)) {
+                // $results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
+                
+                $results_name = $raw_results_name->fetch(PDO::FETCH_ASSOC);
+                
+                echo "<tr>";
+                echo "<td><p>" . $results['permit_id'] . "</td><td>" . $results_name['name'] . "</td><td>" . $results['vehicle_type'] . "</p></td><td>" . $results['start_date'] . "</td><td>" . $results['end_date'] . "</td>";
+                echo "</tr>";
+                // posts results gotten from database(title and text) you can also show id ($results['id'])
+            }
+            echo "</tr></table>";
+            
+        } else { // if there is no matching rows do following
+            echo "No results";
+        }
+    } else if ($selected == "health") {
+        $raw_results      = $db->query("SELECT * FROM has_violations");
+        $raw_results_name = $db->query("SELECT name FROM users");
+        
+        
+        // * means that it selects all fields, you can also write: `id`, `title`, `text`
+        // articles is the name of our table
+        
+        // '%$query%' is what we're looking for, % means anything, for example if $query is Hello
+        // it will match "hello", "Hello man", "gogohello", if you want exact match use `title`='$query'
+        // or if you want to match just full word so "gogohello" is out use '% $query %' ...OR ... '$query %' ... OR ... '% $query'
+        
+        if ($raw_results->rowCount() > 0) { // if one or more rows are returned do following
+            echo "<table class='pure-table pure-table-horizontal'><tr>
+                        <td><h3>Violation ID</h3></td><td><h3>Name</h3></td><td><h3>Department ID</h3></td><td><h3>Time</h3></td><td><h3>Description</h3></td>";
+            while ($results = $raw_results->fetch(PDO::FETCH_ASSOC)) {
+                // $results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
+                
+                $results_name = $raw_results_name->fetch(PDO::FETCH_ASSOC);
+                
+                echo "<tr>";
+                echo "<td>" . $results['violation_id'] . "</td><td>" . $results_name['name'] . "</td><td>" . $results['department_id'] . "</td><td>" . $results['time'] . "</td><td>" . $results['description'] . "</td>";
+                echo "</tr>";
+                // posts results gotten from database(title and text) you can also show id ($results['id'])
+            }
+            echo "</tr></table>";
+            
+        } else { // if there is no matching rows do following
+            echo "No results";
+        }
+    } else if ($selected == "parkviolations") {
+        $raw_results = $db->query("SELECT * FROM parking_citations");
+        
+        // * means that it selects all fields, you can also write: `id`, `title`, `text`
+        // articles is the name of our table
+        
+        // '%$query%' is what we're looking for, % means anything, for example if $query is Hello
+        // it will match "hello", "Hello man", "gogohello", if you want exact match use `title`='$query'
+        // or if you want to match just full word so "gogohello" is out use '% $query %' ...OR ... '$query %' ... OR ... '% $query'
+        
+        if ($raw_results->rowCount() > 0) { // if one or more rows are returned do following
+            echo "<table class='pure-table pure-table-horizontal'><tr>
+                        <td><h3>Citation ID</h3></td><td><h3>Parmit ID</h3></td><td><h3>Registration</h3></td><td><h3>Vehicle Type</h3></td>";
+            while ($results = $raw_results->fetch(PDO::FETCH_ASSOC)) {
+                // $results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
+                
+                echo "<tr>";
+                echo "<td>" . $results['citation_id'] . "</td><td>" . $results['permit_id'] . "</td><td>" . $results['rego'] . "</td><td>" . $results['vehicle_type'] . "</td>";
+                echo "</tr>";
+                // posts results gotten from database(title and text) you can also show id ($results['id'])
+            }
+            echo "</tr></table>";
+            
+        } else { // if there is no matching rows do following
+            echo "No results";
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+else if (isset($_GET['query'])) {
+    $query = $_GET['query'];
     // gets value sent over search form
-     
-    $min_length = 1;
+    
+    
     // you can set minimum length of the query if you want
-     
-    if(strlen($query) >= $min_length){ // if query length is more or equal minimum length then
-         
-        $query = htmlspecialchars($query); 
+    
+    
+    // if query length is more or equal minimum length then
+        
+        
+        $query    = htmlspecialchars($query);
         // changes characters used in html to their equivalents, for example: < to &gt;
         $selected = $_GET['radio'];
         if ($selected == "parkpermits") {
-        	$raw_results = $db->query("SELECT * FROM permits
-            WHERE (`permit_id` LIKE '%".$query."%')");
+            $raw_results      = $db->query("SELECT * FROM permits
+            WHERE (`permit_id` LIKE '%" . $query . "%')");
             $raw_results_name = $db->query("SELECT name FROM users");
-
-        	$raw_results_users = $db->query("SELECT * FROM users WHERE ('name' LIKE '%".$query."%')");
-
-        	// * means that it selects all fields, you can also write: `id`, `title`, `text`
-        	// articles is the name of our table
-         
-        	// '%$query%' is what we're looking for, % means anything, for example if $query is Hello
-        	// it will match "hello", "Hello man", "gogohello", if you want exact match use `title`='$query'
-        	// or if you want to match just full word so "gogohello" is out use '% $query %' ...OR ... '$query %' ... OR ... '% $query'
-         
-        	if($raw_results->rowCount() > 0){ // if one or more rows are returned do following
-             	echo "<table class='pure-table pure-table-horizontal'><tr>
+            
+            $raw_results_users = $db->query("SELECT * FROM users WHERE ('name' LIKE '%" . $query . "%')");
+            
+            // * means that it selects all fields, you can also write: `id`, `title`, `text`
+            // articles is the name of our table
+            
+            // '%$query%' is what we're looking for, % means anything, for example if $query is Hello
+            // it will match "hello", "Hello man", "gogohello", if you want exact match use `title`='$query'
+            // or if you want to match just full word so "gogohello" is out use '% $query %' ...OR ... '$query %' ... OR ... '% $query'
+            
+            if ($raw_results->rowCount() > 0) { // if one or more rows are returned do following
+                echo "<table class='pure-table pure-table-horizontal'><tr>
                         <td><h3>Permit ID</h3></td><td><h3>Name</h3></td><td><h3>Vehicle Type</h3></td><td><h3>Start Date</h3></td><td><h3>Expiry Date</h3></td>";
-            	while($results = $raw_results->fetch(PDO::FETCH_ASSOC)){
-            	// $results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
+                while ($results = $raw_results->fetch(PDO::FETCH_ASSOC)) {
+                    // $results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
+                    
+                    $results_name  = $raw_results_name->fetch(PDO::FETCH_ASSOC);
+                    $results_users = $raw_results_users->fetch(PDO::FETCH_ASSOC);
+                    echo "<tr>";
+                    echo "<td><p>" . $results['permit_id'] . "</td><td>" . $results_name['name'] . "</td><td>" . $results['vehicle_type'] . "</p></td><td>" . $results['start_date'] . "</td><td>" . $results['end_date'] . "</td>";
+                    echo "</tr>";
+                    // posts results gotten from database(title and text) you can also show id ($results['id'])
+                }
+                echo "</tr></table>";
                 
-                	$results_name = $raw_results_name->fetch(PDO::FETCH_ASSOC);
-                	$results_users = $raw_results_users->fetch(PDO::FETCH_ASSOC);
-                	echo "<tr>";
-               	 	echo "<td><p>".$results['permit_id']."</td><td>".$results_name['name']."</td><td>".$results['vehicle_type']."</p></td><td>".$results['start_date']."</td><td>".$results['end_date']."</td>";
-                	echo "</tr>";
-                	// posts results gotten from database(title and text) you can also show id ($results['id'])
-           		 }
-            	echo "</tr></table>";
-             
-        	}
-       		 else{ // if there is no matching rows do following
-            	echo "No results";
-        	}
+            } else { // if there is no matching rows do following
+                echo "No results";
+            }
         } else if ($selected == "health") {
-         	$raw_results = $db->query("SELECT * FROM has_violations
-            WHERE (`name` LIKE '%".$query."%')");
+            $raw_results      = $db->query("SELECT * FROM has_violations
+            WHERE (`name` LIKE '%" . $query . "%')");
             $raw_results_name = $db->query("SELECT name FROM users");
-
-        	$raw_results_users = $db->query("SELECT * FROM users WHERE ('name' LIKE '%".$query."%')");
-
-        	// * means that it selects all fields, you can also write: `id`, `title`, `text`
-        	// articles is the name of our table
-         
-        	// '%$query%' is what we're looking for, % means anything, for example if $query is Hello
-        	// it will match "hello", "Hello man", "gogohello", if you want exact match use `title`='$query'
-        	// or if you want to match just full word so "gogohello" is out use '% $query %' ...OR ... '$query %' ... OR ... '% $query'
-         
-        	if($raw_results->rowCount() > 0){ // if one or more rows are returned do following
-             	echo "<table class='pure-table pure-table-horizontal'><tr>
+            
+            $raw_results_users = $db->query("SELECT * FROM users WHERE ('name' LIKE '%" . $query . "%')");
+            
+            // * means that it selects all fields, you can also write: `id`, `title`, `text`
+            // articles is the name of our table
+            
+            // '%$query%' is what we're looking for, % means anything, for example if $query is Hello
+            // it will match "hello", "Hello man", "gogohello", if you want exact match use `title`='$query'
+            // or if you want to match just full word so "gogohello" is out use '% $query %' ...OR ... '$query %' ... OR ... '% $query'
+            
+            if ($raw_results->rowCount() > 0) { // if one or more rows are returned do following
+                echo "<table class='pure-table pure-table-horizontal'><tr>
                         <td><h3>Violation ID</h3></td><td><h3>Name</h3></td><td><h3>Department ID</h3></td><td><h3>Time</h3></td><td><h3>Description</h3></td>";
-            	while($results = $raw_results->fetch(PDO::FETCH_ASSOC)){
-            	// $results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
+                while ($results = $raw_results->fetch(PDO::FETCH_ASSOC)) {
+                    // $results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
+                    
+                    $results_name  = $raw_results_name->fetch(PDO::FETCH_ASSOC);
+                    $results_users = $raw_results_users->fetch(PDO::FETCH_ASSOC);
+                    echo "<tr>";
+                    echo "<td>" . $results['violation_id'] . "</td><td>" . $results_name['name'] . "</td><td>" . $results['department_id'] . "</td><td>" . $results['time'] . "</td><td>" . $results['description'] . "</td>";
+                    echo "</tr>";
+                    // posts results gotten from database(title and text) you can also show id ($results['id'])
+                }
+                echo "</tr></table>";
                 
-                	$results_name = $raw_results_name->fetch(PDO::FETCH_ASSOC);
-                	$results_users = $raw_results_users->fetch(PDO::FETCH_ASSOC);
-                	echo "<tr>";
-               	 	echo "<td>".$results['violation_id']."</td><td>".$results_name['name']."</td><td>".$results['department_id']."</td><td>".$results['time']."</td><td>".$results['description']."</td>";
-                	echo "</tr>";
-                	// posts results gotten from database(title and text) you can also show id ($results['id'])
-           		 }
-            	echo "</tr></table>";
-             
-        	}
-       		 else{ // if there is no matching rows do following
-            	echo "No results";
-        	}
-    	} else if ($selected == "parkviolations") {
-         	$raw_results = $db->query("SELECT * FROM parking_citations
-            WHERE (`citation_id` LIKE '%".$query."%')");
-
-        	// * means that it selects all fields, you can also write: `id`, `title`, `text`
-        	// articles is the name of our table
-         
-        	// '%$query%' is what we're looking for, % means anything, for example if $query is Hello
-        	// it will match "hello", "Hello man", "gogohello", if you want exact match use `title`='$query'
-        	// or if you want to match just full word so "gogohello" is out use '% $query %' ...OR ... '$query %' ... OR ... '% $query'
-         
-        	if($raw_results->rowCount() > 0){ // if one or more rows are returned do following
-             	echo "<table class='pure-table pure-table-horizontal'><tr>
+            } else { // if there is no matching rows do following
+                echo "No results";
+            }
+        } else if ($selected == "parkviolations") {
+            $raw_results = $db->query("SELECT * FROM parking_citations
+            WHERE (`citation_id` LIKE '%" . $query . "%')");
+            
+            // * means that it selects all fields, you can also write: `id`, `title`, `text`
+            // articles is the name of our table
+            
+            // '%$query%' is what we're looking for, % means anything, for example if $query is Hello
+            // it will match "hello", "Hello man", "gogohello", if you want exact match use `title`='$query'
+            // or if you want to match just full word so "gogohello" is out use '% $query %' ...OR ... '$query %' ... OR ... '% $query'
+            
+            if ($raw_results->rowCount() > 0) { // if one or more rows are returned do following
+                echo "<table class='pure-table pure-table-horizontal'><tr>
                         <td><h3>Citation ID</h3></td><td><h3>Parmit ID</h3></td><td><h3>Registration</h3></td><td><h3>Vehicle Type</h3></td>";
-            	while($results = $raw_results->fetch(PDO::FETCH_ASSOC)){
-            	// $results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
-               
-                	echo "<tr>";
-               	 	echo "<td>".$results['citation_id']."</td><td>".$results['permit_id']."</td><td>".$results['rego']."</td><td>".$results['vehicle_type']."</td>";
-                	echo "</tr>";
-                	// posts results gotten from database(title and text) you can also show id ($results['id'])
-           		 }
-            	echo "</tr></table>";
-             
-        	}
-       		 else{ // if there is no matching rows do following
-            	echo "No results";
-        	}
-    	}
-    else{ // if query length is less than minimum
-        echo "Minimum length is ".$min_length;
-    }
-   }
-        }
+                while ($results = $raw_results->fetch(PDO::FETCH_ASSOC)) {
+                    // $results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
+                    
+                    echo "<tr>";
+                    echo "<td>" . $results['citation_id'] . "</td><td>" . $results['permit_id'] . "</td><td>" . $results['rego'] . "</td><td>" . $results['vehicle_type'] . "</td>";
+                    echo "</tr>";
+                    // posts results gotten from database(title and text) you can also show id ($results['id'])
+                }
+                echo "</tr></table>";
+                
+            } else { // if there is no matching rows do following
+                echo "No results";
+            }
+        } 
+    
+}
+}
 
 ?>
         </div>

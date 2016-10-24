@@ -47,7 +47,8 @@ $type_query = "SELECT type FROM users WHERE email = '$email'";
 		$cookie_type = "type";
 		$cookie_type_value = $result_type;
 		setcookie($cookie_type, $cookie_type_value, time() + (86400 * 30), "/");
-		header('Location: ParkingPermits.php');
+		
+		header('Location: Home.php');
 
 } else {
     echo 'Invalid password.';
