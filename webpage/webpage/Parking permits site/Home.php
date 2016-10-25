@@ -138,7 +138,7 @@
                 echo '</br> Welcome back, there are currently no outstanding fees. Thankyou :).';
             	}
               } else {
-                echo 'sign in or sign up';
+                echo "<h3 class='text-left'>Sign in or sign up using the drop down</h3>";
               }
             ?>
           

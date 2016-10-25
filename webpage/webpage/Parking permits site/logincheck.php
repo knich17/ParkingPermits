@@ -49,15 +49,22 @@ $userid_query = "SELECT user_id FROM users WHERE email = '$email'";
 		$cookie_userid_value = $result_userid;
 		setcookie($cookie_userid, $cookie_userid_value, time() + (86400 * 30), "/");
 
-		echo "$cookie_userid_value";
+		
 		
 		header('Location: Home.php');
 
 } else {
-    echo 'Invalid password.';
+	$cookie_error = "error";
+	$cookie_error_value = "Invalid input please try again";
+	setcookie($cookie_error, $cookie_error_value, time() + (86400 * 30), "/");
+	
+    header('Location: login.php');
 }
 } else {
-	echo 'sql error';
+	$cookie_error = "error";
+	$cookie_error_value = "Invalid input please try again";
+	setcookie($cookie_error, $cookie_error_value, time() + (86400 * 30), "/");
+	header('Location: login.php');
 }
 
 

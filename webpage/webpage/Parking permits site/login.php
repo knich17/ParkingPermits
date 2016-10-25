@@ -35,7 +35,10 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'yes') {
         <ul class="nav navbar-nav navbar-right">
         <li><a href="Home.php">Home</a></li>
           <?php
-          if($_COOKIE['type'] == 'admin'){
+          if($_COOKIE['type'] == ''){
+            echo '<li><a href="parkingpermitapplication.php">Parking Permit Application </a></li>';
+          }
+          else if($_COOKIE['type'] == 'admin'){
             echo '<li><a href="ParkingPermits.php">Search Database</a></li>';
           }else{
             echo '<li><a href="parkingpermitapplication.php">Parking Permit Application </a></li>';
@@ -103,12 +106,19 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'yes') {
 
           <!-- Department parking permit form -->
           <br>
+          <?php
+          if (isset($_COOKIE['error'])){
+            echo $_COOKIE['error'];
+            
+            setcookie("error", "", 1);
+          }
+          ?>
             <form id='login' action='logincheck.php' method='post' 
               accept-charset='UTF-8'>
               <legend>Login</legend>
               <input type='hidden' name='submitted' id='submitted' value='1'/>
               <label for='email' >Email Address*:</label>
-              <input type='text' name='email' id='email' maxlength="50" /><br>
+              <input type='email' name='email' id='email' maxlength="50" /><br>
               <label for='password' >Password*:</label>
               <input type='password' name='password' id='password' maxlength="50" />
               <br>

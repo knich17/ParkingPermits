@@ -122,9 +122,11 @@
               	$sql = "SELECT * FROM permits WHERE user_id = '$user_id'"  ;
                 $result = $db->query($sql);
                 $permit_count = $result->rowCount();
+
               	if($permit_count > 0){ // if one or more rows are returned do following
 
-                  echo "</br> You currently have " .$permit_count. " permits. view your permits below or apply for another.";
+                  echo "</br><h3 class='text-left'> You currently have " .$permit_count. " permit/s.</h3>";
+                  echo "<p align='centre'> View permits below or apply for another.</p>";
                   echo "<table class='pure-table pure-table-horizontal'><tr>
                             <td><h3>Vehicle Registration </h3></td><td><h3>Vehicle Type </h3></td><td><h3>End Date</h3></td>";
                   while($results = $result->fetch(PDO::FETCH_ASSOC)){
@@ -137,38 +139,40 @@
                   // posts results gotten from database(title and text) you can also show id ($results['id'])
                   }
                   echo "</tr></table>";
-             
-                }else{
 
-                  echo '</br> Welcome , you can apply for a permit using the form below.';
+                  echo "</br></br>";
 
                   if ($_COOKIE['type'] == "visitor"){
-                  echo"<h3 class='text-center'>Request a Parking Permit</h3>
+                  echo"<h3 class='text-left'>Request another Parking Permit</h3>
                   <form action='permit_app.php' method='post'>
                     
                     Lisence Plate:<br>
                     
-                    <input type='text' name='plate' required><br>
+                    <input type='text' name='plate' required>
+                    <br>
 
                     <br>
-                    Vehicle Type:<br>
+                    Vehicle Type:
+                    <br>
                     
                     <select name='vehicle_type' required>
                       <option value=''>None</option>
                       <option value='2 wheels'>2 Wheel</option>
                       <option value='4 wheels'>4 Wheel</option>
                       <option value='other'>Other</option>
-                    </select><br>
-                    
-                     Permit Start Date:
-                    <input type='date' name='date_time' min='2016-01-01' required><br>
-                    Duration:
-                    <select required name='duration'>
-                    
-                      <option value='days'>Days</option>
-                     
-                      
                     </select>
+                    <br>
+                    
+                    <br>
+                    Permit Start Date:
+                    <input type='date' name='date_time' min='2016-01-01' required>
+                    <br>
+                    
+                    <select required name='duration' hidden>
+                    <option value='days'>Days</option>
+                    </select>
+                    
+                    
                     <select required name = 'lenght'>
                     <option value=''>None</option>
                       <option value='1'>1</option>
@@ -186,7 +190,7 @@
                     
                     <input type='submit' value='Submit'>";
                   }else if($_COOKIE['type'] == 'student'){
-                  echo"<h3 class='text-center'>Request a Parking Permit</h3>
+                  echo"<h3 class='text-left'>Request another Parking Permit</h3>
                   <form action='permit_app.php' method='post'>
                     
                     Lisence Plate:<br>
@@ -194,18 +198,24 @@
                     <input type='text' name='plate' required><br>
 
                     <br>
-                    Vehicle Type:<br>
+                    Vehicle Type:
+                    <br>
                     
                     <select name='vehicle_type' required>
                       <option value=''>None</option>
                       <option value='2 wheels'>2 Wheel</option>
                       <option value='4 wheels'>4 Wheel</option>
                       <option value='other'>Other</option>
-                    </select><br>
-                    
+                    </select>
+                    <br>
+                    <br>
                     Permit Start Date:
-                    <input type='date' name='date_time' min='2016-01-01' required><br>
+                    <br>
+                    <input type='date' name='date_time' min='2016-01-01' required>
+                    <br>
+                    <br>
                     Duration:
+                    <br>
                      <select required name='duration'>
                     <option value=''>None</option>
                       <option value='days'>Days</option>
@@ -213,6 +223,7 @@
                       
                       
                     </select>
+                    
                     <select required name = 'lenght'>
                     <option value=''>None</option>
                       <option value='1'>1</option>
@@ -242,15 +253,18 @@
                     <input type='submit' value='Submit'>";
 
                   }else if($_COOKIE['type'] == 'staff'){
-                  echo"<h3 class='text-center'>Request a Parking Permit</h3>
+                  echo"<h3 class='text-left'>Request another Parking Permit</h3>
                   <form action='permit_app.php' method='post'>
                     
-                    Lisence Plate:<br>
+                    Lisence Plate:
+                    <br>
                     
-                    <input type='text' name='plate' required><br>
+                    <input type='text' name='plate' required>
+                    <br>
 
                     <br>
-                    Vehicle Type:<br>
+                    Vehicle Type:
+                    <br>
                     
                     <select name='vehicle_type' required>
                       <option value=''>None</option>
@@ -259,17 +273,196 @@
                       <option value='other'>Other</option>
                     </select><br>
                     
+                    <br>
                     Permit Start Date:
-                    <input type='date' name='date_time' min='2016-01-01' required><br>
+                    <br>
+                    <input type='date' name='date_time' min='2016-01-01' required>
+                    <br><br>
                     Duration:
+                    <br>
                      <select required name='duration'>
                     <option value=''>None</option>
                       <option value='days'>Days</option>
-                      <option value='weeks'>Weeks</option>
                       <option value='months'>Months</option>
                       <option value='year'>Year</option>
                       
                     </select>
+
+                    <select required name = 'lenght'>
+                    <option value=''>None</option>
+                      <option value='1'>1</option>
+                      <option value='2'>2</option>
+                      <option value='3'>3</option>
+                      <option value='4'>4</option>
+                      <option value='5'>5</option>
+                      <option value='6'>6</option>
+                      <option value='7'>7</option>
+                      <option value='8'>8</option>
+                      <option value='9'>9</option>
+                      <option value='10'>10</option>
+                      <option value='11'>11</option>
+                    </select>
+                    <br>
+                    <br>
+                    
+                    
+                    <input type='submit' value='Submit'>";
+
+                  }
+
+
+
+             
+                }else{
+
+                  echo '</br> Welcome , you can apply for a permit using the form below.';
+
+                  if ($_COOKIE['type'] == "visitor"){
+                  echo"<h3 class='text-left'>Request a Parking Permit</h3>
+                  <form action='permit_app.php' method='post'>
+                    
+                    Lisence Plate:<br>
+                    
+                    <input type='text' name='plate' required>
+                    <br>
+
+                    <br>
+                    Vehicle Type:
+                    <br>
+                    
+                    <select name='vehicle_type' required>
+                      <option value=''>None</option>
+                      <option value='2 wheels'>2 Wheel</option>
+                      <option value='4 wheels'>4 Wheel</option>
+                      <option value='other'>Other</option>
+                    </select>
+                    <br>
+                    
+                    <br>
+                    Permit Start Date:
+                    <input type='date' name='date_time' min='2016-01-01' required>
+                    <br>
+                    
+                    <select required name='duration' hidden>
+                    <option value='days'>Days</option>
+                    </select>
+                    
+                    
+                    <select required name = 'lenght'>
+                    <option value=''>None</option>
+                      <option value='1'>1</option>
+                      <option value='2'>2</option>
+                      <option value='3'>3</option>
+                      <option value='4'>4</option>
+                      <option value='5'>5</option>
+                      <option value='6'>6</option>
+                      <option value='7'>7</option>
+                      
+                    </select>
+                    <br>
+                    <br>
+                    
+                    
+                    <input type='submit' value='Submit'>";
+                  }else if($_COOKIE['type'] == 'student'){
+                  echo"<h3 class='text-left'>Request a Parking Permit</h3>
+                  <form action='permit_app.php' method='post'>
+                    
+                    Lisence Plate:<br>
+                    
+                    <input type='text' name='plate' required><br>
+
+                    <br>
+                    Vehicle Type:
+                    <br>
+                    
+                    <select name='vehicle_type' required>
+                      <option value=''>None</option>
+                      <option value='2 wheels'>2 Wheel</option>
+                      <option value='4 wheels'>4 Wheel</option>
+                      <option value='other'>Other</option>
+                    </select>
+                    <br>
+                    <br>
+                    Permit Start Date:
+                    <br>
+                    <input type='date' name='date_time' min='2016-01-01' required>
+                    <br>
+                    <br>
+                    Duration:
+                    <br>
+                     <select required name='duration'>
+                    <option value=''>None</option>
+                      <option value='days'>Days</option>
+                      <option value='months'>Months</option>
+                      
+                      
+                    </select>
+                    
+                    <select required name = 'lenght'>
+                    <option value=''>None</option>
+                      <option value='1'>1</option>
+                      <option value='2'>2</option>
+                      <option value='3'>3</option>
+                      <option value='4'>4</option>
+                      <option value='5'>5</option>
+                      <option value='6'>6</option>
+                      <option value='7'>7</option>
+                      <option value='8'>8</option>
+                      <option value='9'>9</option>
+                      <option value='10'>10</option>
+                      <option value='11'>11</option>
+                      <option value='12'>12</option>
+                      <option value='13'>13</option>
+                      <option value='14'>14</option>
+                      <option value='15'>15</option>
+                      <option value='16'>16</option>
+                      
+                      
+                      
+                    </select>
+                    <br>
+                    <br>
+                    
+                    
+                    <input type='submit' value='Submit'>";
+
+                  }else if($_COOKIE['type'] == 'staff'){
+                  echo"<h3 class='text-left'>Request a Parking Permit</h3>
+                  <form action='permit_app.php' method='post'>
+                    
+                    Lisence Plate:
+                    <br>
+                    
+                    <input type='text' name='plate' required>
+                    <br>
+
+                    <br>
+                    Vehicle Type:
+                    <br>
+                    
+                    <select name='vehicle_type' required>
+                      <option value=''>None</option>
+                      <option value='2 wheels'>2 Wheel</option>
+                      <option value='4 wheels'>4 Wheel</option>
+                      <option value='other'>Other</option>
+                    </select><br>
+                    
+                    <br>
+                    Permit Start Date:
+                    <br>
+                    <input type='date' name='date_time' min='2016-01-01' required>
+                    <br><br>
+                    Duration:
+                    <br>
+                     <select required name='duration'>
+                    <option value=''>None</option>
+                      <option value='days'>Days</option>
+                      <option value='months'>Months</option>
+                      <option value='year'>Year</option>
+                      
+                    </select>
+
                     <select required name = 'lenght'>
                     <option value=''>None</option>
                       <option value='1'>1</option>

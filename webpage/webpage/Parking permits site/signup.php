@@ -42,12 +42,15 @@
        <!-- Navigation section linking pages and login/logout buttons -->
       <div class="collapse navbar-collapse" id="myInverseNavbar2">
         <ul class="nav navbar-nav navbar-right">
-        <li><a href="Home.php">Home</a></li>
+        
         <?php
           if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'yes') {
             echo "Welcome, " . $_COOKIE['user'] . " ";
             echo '<a href="loggedout.php">Logout</a>';
           }
+          ?>
+          <li><a href="Home.php">Home</a></li>
+          <?php
           if($_COOKIE['type'] == 'admin'){
             echo '<li><a href="ParkingPermits.php">Search Database</a></li>';
           }else{
@@ -120,9 +123,9 @@
 
 <input type='hidden' name='submitted' id='submitted' value='1'/>
 <label for='name' >Your Full Name*: </label>
-<input type='text' name='name' id='name' maxlength="50" />
+<input type='text' name='name' id='name' maxlength="50" required />
 <label for='email' >Email Address*:</label>
-<input type='text' name='email' id='email' maxlength="50" /><br>
+<input type='email' name='email' id='email' maxlength="50" required /><br>
 
 
 <label for='password' >Password*:</label>
