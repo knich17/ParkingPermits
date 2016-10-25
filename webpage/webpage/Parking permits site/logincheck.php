@@ -56,14 +56,14 @@ $userid_query = "SELECT user_id FROM users WHERE email = '$email'";
 } else {
 	$cookie_error = "error";
 	$cookie_error_value = "Invalid input please try again";
-	setcookie($cookie_error, $cookie_error_value, time() + (86400 * 30), "/");
+	setcookie($cookie_error, $cookie_error_value, 1, "/");
 	
     header('Location: login.php');
 }
 } else {
 	$cookie_error = "error";
 	$cookie_error_value = "Invalid input please try again";
-	setcookie($cookie_error, $cookie_error_value, time() + (86400 * 30), "/");
+	setcookie($cookie_error, $cookie_error_value, 1, "/");
 	header('Location: login.php');
 }
 

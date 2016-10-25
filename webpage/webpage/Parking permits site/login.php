@@ -107,10 +107,11 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'yes') {
           <!-- Department parking permit form -->
           <br>
           <?php
+          ini_set('display_errors',0);
           if (isset($_COOKIE['error'])){
             echo $_COOKIE['error'];
-            
-            setcookie("error", "", 1);
+
+            setcookie('error', "", 1);
           }
           ?>
             <form id='login' action='logincheck.php' method='post' 
