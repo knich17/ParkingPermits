@@ -35,6 +35,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'yes') {
         <ul class="nav navbar-nav navbar-right">
         <li><a href="Home.php">Home</a></li>
           <?php
+          ini_set('display_errors',0);
           if($_COOKIE['type'] == ''){
             echo '<li><a href="parkingpermitapplication.php">Parking Permit Application </a></li>';
           }

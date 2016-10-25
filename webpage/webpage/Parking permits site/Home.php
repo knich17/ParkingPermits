@@ -49,7 +49,9 @@
           ?>
           <li><a href="Home.php">Home</a></li>
           <?php
+          ini_set('display_errors',0);
           if($_COOKIE['type'] == 'admin'){
+
             echo '<li><a href="ParkingPermits.php">Search Database</a></li>';
           }else{
             echo '<li><a href="parkingpermitapplication.php">Parking Permit Application </a></li>';

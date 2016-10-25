@@ -43,6 +43,7 @@
         <ul class="nav navbar-nav navbar-right">
         
         <?php
+        ini_set('display_errors',0);
           if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'yes') {
             echo "<li><a>Welcome, " . $_COOKIE['user'] . " </a></li>";
           }
