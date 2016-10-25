@@ -35,36 +35,38 @@ $userid_query = "SELECT user_id FROM users WHERE email = '$email'";
 	echo $result_name;
 	echo $pass;
 	echo $result_type;
+
 	if ($result && $result_type && $result_name && $result_userid){
-    if (password_verify($pass, $result)) {
-    	
-    	$_SESSION['loggedIn'] = 'yes';
-    	$cookie_user = "user";
-		$cookie_user_value = $result_name;
-		setcookie($cookie_user, $cookie_user_value, time() + (86400 * 30), "/");
-		$cookie_type = "type";
-		$cookie_type_value = $result_type;
-		setcookie($cookie_type, $cookie_type_value, time() + (86400 * 30), "/");
-		$cookie_userid = "user_id";
-		$cookie_userid_value = $result_userid;
-		setcookie($cookie_userid, $cookie_userid_value, time() + (86400 * 30), "/");
+	    if (password_verify($pass, $result)) {
+	    	
+	    	$_SESSION['loggedIn'] = 'yes';
+	    	$cookie_user = "user";
+			$cookie_user_value = $result_name;
+			setcookie($cookie_user, $cookie_user_value, time() + (86400 * 30), "/");
+			$cookie_type = "type";
+			$cookie_type_value = $result_type;
+			setcookie($cookie_type, $cookie_type_value, time() + (86400 * 30), "/");
+			$cookie_userid = "user_id";
+			$cookie_userid_value = $result_userid;
+			setcookie($cookie_userid, $cookie_userid_value, time() + (86400 * 30), "/");
 
-		
-		
-		header('Location: Home.php');
+			
+			
+			header('Location: Home.php');
 
-} else {
-	$cookie_error = "error";
-	$cookie_error_value = "Invalid input please try again";
-	setcookie($cookie_error, $cookie_error_value, 1, "/");
+		} else {
+			$cookie_error = "error";
+			$cookie_error_value = "Invalid input please try again";
+			setcookie($cookie_error, $cookie_error_value, 1, "/");
+			
+		    header('Location: login.php');
+		}
 	
-    header('Location: login.php');
-}
-} else {
-	$cookie_error = "error";
-	$cookie_error_value = "Invalid input please try again";
-	setcookie($cookie_error, $cookie_error_value, 1, "/");
-	header('Location: login.php');
+	} else {
+		$cookie_error = "error";
+		$cookie_error_value = "Invalid input please try again";
+		setcookie($cookie_error, $cookie_error_value, 1, "/");
+		header('Location: login.php');
 }
 
 

@@ -1,6 +1,6 @@
 
 <?php
-$connect=mysqli_connect('localhost','root','qwerty','parking_permits');
+$connect=mysqli_connect('localhost','root','','parking_permits');
  
 if(mysqli_connect_errno($connect))
 {
@@ -28,20 +28,27 @@ $sql = "INSERT INTO citations(admin_id, time, description) VALUES ('1', '$date_t
 $sql2 = "";
 if ($connect->query($sql) === TRUE) {
 	$citation_id = $connect->insert_id;
+
 	if ($violation_type == "1") {
 		$sql2 = "INSERT INTO parking_citations(citation_id, permit_id, rego, vehicle_type) VALUES ('$citation_id', $permit_id, '$rego', '$vehicle_type')";
 	} else {
 		$sql2 = "INSERT INTO smoking_citations(citation_id, violator_name, department_id, supervisor_name, location) VALUES ('$citation_id', '$violator_name', '$department_id', '$supervisor', '$place')";
 	}
+
 	if ($connect->query($sql2) === TRUE) {
 		echo "Both records created sucessfully";
+		header('Location: parkingpermitapplication.php');
 	} else {
     	echo "Error2: " . $sql2 . "<br>" . $connect->error;
+    	header('Location: parkingpermitapplication.php');
 	}
     //echo "New record created successfully";
 } else {
+
     echo "Error1: " . $sql . "<br>" . $connect->error;
+    header('Location: parkingpermitapplication.php');
 }
+
 
 // if ($result->num_rows > 0) {
 //     // output data of each row
