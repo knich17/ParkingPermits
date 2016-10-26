@@ -252,7 +252,7 @@ session_start();
                             
                             if ($raw_results->rowCount() > 0) { // if one or more rows are returned do following
                                 echo "<table class='pure-table pure-table-horizontal'><tr>
-                                            <td><h3>Citation ID</h3></td><td><h3>Parmit ID</h3></td><td><h3>Registration</h3></td><td><h3>Vehicle Type</h3></td>";
+                                            <td><h3>Citation ID</h3></td><td><h3>Permit ID</h3></td><td><h3>Registration</h3></td><td><h3>Vehicle Type</h3></td>";
                                 while ($results = $raw_results->fetch(PDO::FETCH_ASSOC)) {
                                     // $results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
                                     
@@ -370,7 +370,7 @@ session_start();
                                 
                                 if ($raw_results->rowCount() > 0) { // if one or more rows are returned do following
                                     echo "<table class='pure-table pure-table-horizontal'><tr>
-                                            <td><h3>Citation ID</h3></td><td><h3>Parmit ID</h3></td><td><h3>Registration</h3></td><td><h3>Vehicle Type</h3></td>";
+                                            <td><h3>Citation ID</h3></td><td><h3>Permit ID</h3></td><td><h3>Registration</h3></td><td><h3>Vehicle Type</h3></td>";
                                     while ($results = $raw_results->fetch(PDO::FETCH_ASSOC)) {
                                         // $results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
                                         
