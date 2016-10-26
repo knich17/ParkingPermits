@@ -53,15 +53,14 @@ session_destroy();
 
 
                     <li>
-                        <a href="HealthandSafety.php">Health & Safety
-                        Violations</a>
+                        <a href="Violations.php">Report Violation</a>
                     </li>
 
 
                     <li class="dropdown">
                         <a aria-expanded="false" aria-haspopup="true" class=
                         "dropdown-toggle" data-toggle="dropdown" href="#" role=
-                        "button">Dropdown <span class="caret"></span></a>
+                        "button">Account <span class="caret"></span></a>
 
                         <ul class="dropdown-menu">
                             <li>
@@ -74,18 +73,7 @@ session_destroy();
                             </li>
 
 
-                            <li>
-                                <a href="#">Something else here</a>
-                            </li>
-
-
-                            <li class="divider" role="separator">
-                            </li>
-
-
-                            <li>
-                                <a href="#">Separated link</a>
-                            </li>
+                           
                         </ul>
                     </li>
                 </ul>
