@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Atmiya Parking</title>
+
+  <!-- styles -->
+  <link rel="stylesheet" href="../css/bootstrap.css">
+
+<body>
+    <nav class="navbar navbar-inverse col-lg-12">
+    <div class="container-fluid"> 
+      
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myInverseNavbar2" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+        <a class="navbar-brand" href="#">Atmiya College Parking</a> </div>
+
+       <!-- Navigation section linking pages and login/logout buttons -->
+      <div class="collapse navbar-collapse" id="myInverseNavbar2">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="ParkingPermits.html">Parking</a></li>
+          <li><a href="HealthandSafety.html">Health & Safety Violations</a></li>
+          <li><a href="#">Link</a></li>
+          <li><a href="#">Link</a></li>
+          <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">Dropdown <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      
+    </div>
+    <!-- Photo carousel banner  --> 
+  </nav>
+  <nav class="sidemenu" style="z-index:3;width:250px;margin-top:51px;" id ="sidemenu">
+  <form id='register' action='signup.php' method='post' 
+    accept-charset='UTF-8'>
+
+<legend>Register</legend>
+
+<input type='hidden' name='submitted' id='submitted' value='1'/>
+<label for='name' >Your Full Name*: </label>
+<input type='text' name='name' id='name' maxlength="50" />
+<label for='email' >Email Address*:</label>
+<input type='text' name='email' id='email' maxlength="50" />
+
+<select name="department_id" required >
+      <option value="">None</option>
+      <option value="1">IT</option>
+      <option value="2">Business</option>
+      <option value="3">drama</option>
+      <option value="4">sport</option>
+    </select><br>
+     Who are you:<br>
+    
+    <select name="user_type" required>
+    <option value="">None</option>
+      <option value="student">Student</option>
+      <option value="staff">Staff</option>
+      <option value="visitor">Visitor</option>
+    </select><br>
+
+<label for='password' >Password*:</label>
+<input type='password' name='password' id='password' maxlength="50" />
+<input type='submit' name='Submit' value='Submit' />
+
+
+</form>
+    <br>
+    
+    
+   
+  </div>
+</body>
+
+</html>
