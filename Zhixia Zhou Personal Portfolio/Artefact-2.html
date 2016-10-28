@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Parking Permits</title>
+  <meta name="generator" content="Google Web Designer 1.6.1.0726">
+ <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+  <style type="text/css" id="gwd-text-style">
+    p {
+      margin: 0px;
+    }
+    h1 {
+      margin: 0px;
+      text-align:center;
+    }
+    h2 {
+      margin: 0px;
+    }
+    h3 {
+      margin: 0px;
+    }
+  </style>
+  <style type="text/css">
+    html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+    .w3-sidenav a,.w3-sidenav h4{padding:12px;}
+    .w3-navbar a{padding-top:12px !important;padding-bottom:12px !important;}
+    body {
+      transform: perspective(1400px) matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+      transform-style: preserve-3d;
+      background-color: transparent;
+      font-family: "Lato", sans-serif
+    }
+  </style>
+  <h1>
+    Parking Permits
+  </h1>
+</head>
+
+<body>
+  <nav class="sidemenu" style="z-index:3;width:250px;margin-top:51px;" id ="sidemenu">
+  <h4><b>Menu</b></h4>
+  <a href="#" class="w3-hover-black">Link</a><br>
+  <a href="#" class="w3-hover-black">Link</a><br>
+  <a href="#" class="w3-hover-black">Link</a><br>
+  <a href="#" class="w3-hover-black">Link</a><br>
+  </nav>
+    <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+  <div class="mainform" style="margin-left:550px">
+
+  <form>
+    Department Requesting:<br>
+    
+    <select>
+      <option value="blank"></option>
+      <option value="blank"></option>
+      <option value="blank"></option>
+    </select><br>
+    First name:<br>
+    
+    <input type="text" name="firstname"><br>
+    Last name:<br>
+    
+    <input type="text" name="lastname"><br>
+    Lisence Plate:<br>
+    
+    <input type="text" name="plate"><br>
+    Who are you:<br>
+    
+    <select>
+      <option value="Student">Studnet</option>
+      <option value="Staff">Staff</option>
+      <option value="Vistor">Visitor</option>
+    </select><br>
+    Vehicle Type:<br>
+    
+    <select>
+      <option value="Convertible">Convertible</option>
+      <option value="Coupe">Coupe</option>
+      <option value="Hetch">Hetch</option>
+      <option value="Sedan">Sedan</option>
+      <option value="SUV">SUV</option>
+      <option value="Wagon">Wagon</option>
+    </select><br>
+    Entry Date:
+    <input type="date" name="bday" min="2016-08-31"><br>
+    Duration:
+    <select>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select><br>
+    <br>
+    
+    <input type="submit" value="Submit">
+  </form>
+  </div>
+</body>
+
+</html>
