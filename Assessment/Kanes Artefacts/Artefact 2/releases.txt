@@ -1,0 +1,20 @@
+1 - ease of application - could have - 4
+2 - long teacher permits - should have - 1
+3 - flexible student permits - should have - 1
+4 - department permit submission - must have - 32
+5 - department parking violation managment - should have - 16
+6 - public health and safety - must have - 16
+7 - public HaS anonimity - should have - 4
+8 - viewing parking/health violations - should have - 16
+9 - viewing all parking/health violations - must have - 8
+10 - highlighting unpaid fines - must have - 4
+11 - notifying unpaid fines - could have - 16
+
+release 1
+4, 6, 8, 9
+
+release 2
+2, 3, 7, 5, 10
+
+release 3/4
+1, 11

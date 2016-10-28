@@ -1,0 +1,38 @@
+Notes:
+Parking permits dates aren't being submitted
+
+Viewing/search:
+	Should use tabs rather than radio buttons
+	Should print all data by default then restrict with queries
+	Sort out how it's getting the name
+
+	parking permit - show rego, query by name instead
+	HaS - Should print all violations with filters (department, time, place?) and query for description
+	parking violations - not tested
+
+HaS violation submission:
+	If logged in:
+		checkbox to remain annonymous
+	if !logged in:
+		option to give name
+		if name is given option to give department
+	Is department the department of the submitter or department responsible for violation?
+
+Parking permit application:
+	if logged in:
+		if admin:
+			currently correct (though department requesting is the aplicants department they belong to)
+			automatically approve application
+		if !admin:
+			all it needs is license plate, vehicle type, start date and duration
+	if !logged in:
+		currently correct though before submition ask for a password/confirm password and say that an account will be created for them or how it can be accessed
+		Alternatively just make them sign-up before applying for permit (signup needed as permit uses userID)
+
+Signup:
+	Confirm password
+
+TODO:
+	ADD PAGE FOR SUBMITTING PARKING/SMOKING VIOLATION (AND DB CONNECTIVITY)
+	Rename parkingpermits.php
+	give option for admins to create new admin accounts

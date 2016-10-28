@@ -1,0 +1,44 @@
+large banner should only be shown on the main/welcome page, not permit applications etc
+Welcome page needs to be created
+trolley in parking picture
+
+Parking permit application page users:
+	Department staff applying for someone in person:
+		Department applying needs to go and should be retrieved from user account (the user is the department staff)
+		Note - An account needn't be created for parking permits created this way, parking violations will also be left on cars physically
+
+	Someone who wants a permit who isn't logged in:
+		Department requesting needs to be removed, this will come from department approving permits
+		Maybe give a choice between creating an account at the same time (requiring a desired password) or not		
+		Payment?
+
+	Someone who wants a permit and is logged in:
+		Only details needed are lisence plate, vehicle type, start date and duration
+		Note - the rest of the details can be taken from the user's accounts
+
+
+HaSV page:
+	Logged in user - Simple check box to remain annonymous (name and id can be taken from account)
+	non-logged in user - The current text boxes for optional name or id
+
+
+Parking and Smoking citations:
+	This page needs to be created for the patrol force to submit citations as per the requirements below:
+
+	"Ability for patrol force to record citations contatining the following information:
+		citation number/id
+		date and time of violation
+		violation type (parking, smoking, other)
+
+	if parking violation the following need also be recorded:
+		permit number/id (if vehicle has permit)
+		vehicle license number (if vehicle does not have permit)
+		vehicle type
+
+	if smoking violation the following need also be recorded:
+		violator name
+		department the violator belongs to
+		violator supervisor
+		place on campus"
+
+

@@ -1,0 +1,10 @@
+Solution:
+	I had already had previous experience with WAMP servers and allowing them to work online but when I tried to do just that I was unable to connect. After a couple of hours of researching using the webpages sourced below I eventually came to the conclusion that the problem was not with the WAMP configuration but with my network setup as I had a new initial router installed not too long ago. So using the knowledge gained from my networking subject I managed to put the first router into pass through mode to allow access to the second router which had the correct ports already forwarded.
+
+	When my teammate (Liam) offered to host the webpage but said he was having trouble I advised him to use the same version of WAMP that I was using as he was using a newer one with some large changes in regards hosting. He'd aparently already tried it to no success but after some discussion we realised he'd simply forgotten to set the WAMP server to online mode.
+
+Sources:
+http://www.eazytrix.in/2016/07/how-to-put-your-wamp-online-for-someone.html
+http://superuser.com/questions/1129466/putting-wampserver-online
+http://blogs.candoerz.com/question/213518/why-wamp-server-put-online-offline-option-is-missing.aspx
+http://www.simonewebdesign.it/how-to-put-online-your-wampserver/
